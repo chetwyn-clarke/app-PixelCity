@@ -39,5 +39,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>PixelCity requires your location to show photos from Flickr.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>PixelCity requires your location to show photos from Flickr.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>PixelCity requires your location to show photos from Flickr.</string>
 </dict>
 </plist>
