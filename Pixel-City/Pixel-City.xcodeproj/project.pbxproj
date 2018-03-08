@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		731154E12051817000514B6C /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731154E02051817000514B6C /* DroppablePin.swift */; };
 		7335D31C204E2F86009E9207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7335D31B204E2F86009E9207 /* AppDelegate.swift */; };
 		7335D31E204E2F86009E9207 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7335D31D204E2F86009E9207 /* MapVC.swift */; };
 		7335D321204E2F86009E9207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7335D31F204E2F86009E9207 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		731154E02051817000514B6C /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 		7335D318204E2F86009E9207 /* Pixel-City.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pixel-City.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7335D31B204E2F86009E9207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7335D31D204E2F86009E9207 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		7335D32E204E2FAD009E9207 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				731154E02051817000514B6C /* DroppablePin.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7335D31E204E2F86009E9207 /* MapVC.swift in Sources */,
+				731154E12051817000514B6C /* DroppablePin.swift in Sources */,
 				7335D31C204E2F86009E9207 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
