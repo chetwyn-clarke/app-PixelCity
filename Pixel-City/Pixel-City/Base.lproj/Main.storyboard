@@ -61,6 +61,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FT4-Ke-o1Z">
                                 <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="5vU-7X-BYQ"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -68,11 +71,10 @@
                             <constraint firstItem="FT4-Ke-o1Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0hv-RQ-oaB"/>
                             <constraint firstItem="j9u-uu-mh3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0xB-4y-Y8o"/>
                             <constraint firstItem="JAu-NL-pwj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3dB-dH-wsc"/>
-                            <constraint firstItem="JAu-NL-pwj" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="6k6-la-bws"/>
+                            <constraint firstItem="ysX-ar-fNR" firstAttribute="bottom" secondItem="FT4-Ke-o1Z" secondAttribute="top" constant="-20" id="Hyy-P3-WXp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ysX-ar-fNR" secondAttribute="trailing" constant="16" id="J9E-GM-Ul1"/>
                             <constraint firstItem="j9u-uu-mh3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sl8-ef-TLV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FT4-Ke-o1Z" secondAttribute="bottom" id="TIZ-ch-TLA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ysX-ar-fNR" secondAttribute="bottom" constant="20" id="Z26-fZ-GZr"/>
                             <constraint firstItem="FT4-Ke-o1Z" firstAttribute="top" secondItem="JAu-NL-pwj" secondAttribute="bottom" id="Zh0-fj-4pm"/>
                             <constraint firstItem="JAu-NL-pwj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ajq-2R-8pP"/>
                             <constraint firstAttribute="trailing" secondItem="FT4-Ke-o1Z" secondAttribute="trailing" id="mPz-P9-an7"/>
@@ -83,6 +85,8 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="JAu-NL-pwj" id="Abq-1Q-Ggy"/>
+                        <outlet property="pullUpView" destination="FT4-Ke-o1Z" id="sEz-0C-4eA"/>
+                        <outlet property="pullUpViewHeightConstraint" destination="5vU-7X-BYQ" id="brY-2s-Glx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
