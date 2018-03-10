@@ -27,6 +27,9 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     var spinner: UIActivityIndicatorView?
     var progressLbl: UILabel?
     
+    var flowLayout = UICollectionViewFlowLayout()
+    var collectionView: UICollectionView?
+    
     // MARK: - View configuration
 
     override func viewDidLoad() {
@@ -37,6 +40,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         
         configureLocationServices()
         addDoubleTap()
+        configureCollectionView()
     }
     
     // MARK: - Functions
@@ -55,18 +59,43 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func addSpinner() {
+        spinner = UIActivityIndicatorView()
+        guard let spinner = spinner else { fatalError("Unable to load spinner")}
+        
         let pullUpViewCenter = screenSize.width / 2
         let pullUpViewHeight: CGFloat = 300
-        
-        spinner = UIActivityIndicatorView()
-        
-        guard let spinner = spinner else { fatalError("Unable to load spinner")}
         
         spinner.center = CGPoint(x: pullUpViewCenter - (spinner.frame.width / 2), y: pullUpViewHeight / 2)
         spinner.activityIndicatorViewStyle = .whiteLarge
         spinner.color = UIColor.darkGray
         spinner.startAnimating()
-        pullUpView.addSubview(spinner)
+        collectionView?.addSubview(spinner)
+    }
+    
+    func removeSpinner() {
+        if spinner != nil {
+            spinner?.removeFromSuperview()
+        }
+    }
+    
+    func addProgressLabel() {
+        progressLbl = UILabel()
+        guard let progressLbl = progressLbl else { fatalError("Unable to load progress label.")}
+        
+        let spinnerCenter: CGFloat = 300 / 2
+        let labelWidth: CGFloat = 200
+        
+        progressLbl.frame = CGRect(x: (screenSize.width / 2) - (labelWidth / 2), y: spinnerCenter + 20, width: labelWidth, height: 40)
+        progressLbl.font = UIFont(name: "Avenir Next", size: 16)
+        progressLbl.textColor = UIColor.darkGray
+        progressLbl.textAlignment = .center
+        collectionView?.addSubview(progressLbl)
+    }
+    
+    func removeProgressLabel() {
+        if progressLbl != nil {
+            progressLbl?.removeFromSuperview()
+        }
     }
     
     func animateViewUp() {
@@ -117,9 +146,14 @@ extension MapVC: MKMapViewDelegate {
     
     @objc func dropPin(sender: UITapGestureRecognizer) {
         removePin()
+        removeSpinner()
+        removeProgressLabel()
+        
         animateViewUp()
+        
         addSwipe()
         addSpinner()
+        addProgressLabel()
         
         let touchPoint = sender.location(in: mapView)
         let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
@@ -154,5 +188,36 @@ extension MapVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         centerMapOnUserLocation()
     }
+}
+
+// MARK: - Collection View Data
+
+extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
+        
+        guard let collectionView = collectionView else { fatalError("Unable to load collection view.")}
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: photoCellIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.green
+        pullUpView.addSubview(collectionView)
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // number of items in array
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellIdentifier, for: indexPath) as? PhotoCell else { fatalError("Unable to load collection view cell.") }
+        return cell
+    }
+    
 }
 
