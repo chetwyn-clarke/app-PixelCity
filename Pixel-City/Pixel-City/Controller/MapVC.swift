@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import AlamofireImage
 
 class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -29,6 +31,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     var flowLayout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView?
+    var imageUrlArray = [String]()
     
     // MARK: - View configuration
 
@@ -112,6 +115,29 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
+        imageUrlArray = []
+        
+        Alamofire.request(flickrUrl(forApiKey: apiKey, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
+            
+            guard let json = response.result.value as? Dictionary<String, AnyObject> else { return }
+            
+            let photosDict = json["photos"] as! Dictionary<String, AnyObject>
+            let photosDictArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
+            for photo in photosDictArray {
+                let farmValue = photo["farm"]!
+                let server = photo["server"]!
+                let photoId = photo["id"]!
+                let secret = photo["secret"]!
+                
+                let postUrl = "https://farm\(farmValue).staticflickr.com/\(server)/\(photoId)_\(secret)_z_d.jpg"
+                self.imageUrlArray.append(postUrl)
+            }
+            
+            handler(true)
+        }
+    }
+    
     // MARK: - Actions
 
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
@@ -119,7 +145,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
             centerMapOnUserLocation()
         }
     }
-
+    
 }
 
 // MARK: - MapView Services
@@ -163,6 +189,10 @@ extension MapVC: MKMapViewDelegate {
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+        
+        retrieveUrls(forAnnotation: annotation) { (true) in
+            print(self.imageUrlArray)
+        }
     }
     
     func removePin() {
@@ -170,7 +200,7 @@ extension MapVC: MKMapViewDelegate {
             mapView.removeAnnotation(annotation)
         }
     }
-    
+
 }
 
 // MARK: - Location Services
