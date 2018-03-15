@@ -118,7 +118,6 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
-        imageUrlArray = []
         
         Alamofire.request(flickrUrl(forApiKey: apiKey, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
             
@@ -141,7 +140,6 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func retrieveImages(handler: @escaping (_ status: Bool) -> ()) {
-        imageArray = []
         
         for url in imageUrlArray {
             // Here we are using AlamofireImage
@@ -202,6 +200,10 @@ extension MapVC: MKMapViewDelegate {
         removeProgressLabel()
         cancelAllSessions()
         
+        imageUrlArray = []
+        imageArray = []
+        collectionView?.reloadData()
+        
         animateViewUp()
         
         addSwipe()
@@ -223,7 +225,7 @@ extension MapVC: MKMapViewDelegate {
                     if finished {
                         self.removeSpinner()
                         self.removeProgressLabel()
-                        // reload collection view
+                        self.collectionView?.reloadData()
                     }
                 })
             }
@@ -266,21 +268,24 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: photoCellIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.green
+        collectionView.backgroundColor = UIColor.white
         pullUpView.addSubview(collectionView)
     }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // number of items in array
-        return 4
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellIdentifier, for: indexPath) as? PhotoCell else { fatalError("Unable to load collection view cell.") }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellIdentifier, for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
+        let imageFromIndex = imageArray[indexPath.row]
+        let imageView = UIImageView(image: imageFromIndex)
+        cell.addSubview(imageView)
         return cell
     }
     
