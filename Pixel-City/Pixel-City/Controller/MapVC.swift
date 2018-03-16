@@ -45,6 +45,9 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         configureLocationServices()
         addDoubleTap()
         configureCollectionView()
+        
+        // Need the following to have 3D Touch work.
+        registerForPreviewing(with: self, sourceView: collectionView!)
     }
     
     // MARK: - Functions
@@ -257,7 +260,7 @@ extension MapVC: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - Collection View Data
+// MARK: - Collection View Implementation
 
 extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -296,6 +299,31 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
         popVC.initData(forImage: imageArray[indexPath.row])
         present(popVC, animated: true, completion: nil)
     }
+    
+}
+
+// MARK: - 3D Touch Implementation
+
+extension MapVC: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        // This method determines what will be previwed.
+        guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else { return nil }
+        
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return nil }
+        
+        popVC.initData(forImage: imageArray[indexPath.row])
+        
+        previewingContext.sourceRect = cell.contentView.frame
+        
+        return popVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        // This method determines what VC will be finally presented after your preview.
+        show(viewControllerToCommit, sender: self)
+    }
+    
     
 }
 
