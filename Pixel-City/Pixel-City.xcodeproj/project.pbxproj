@@ -15,6 +15,7 @@
 		7335D321204E2F86009E9207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7335D31F204E2F86009E9207 /* Main.storyboard */; };
 		7335D323204E2F86009E9207 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7335D322204E2F86009E9207 /* Assets.xcassets */; };
 		7335D326204E2F86009E9207 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7335D324204E2F86009E9207 /* LaunchScreen.storyboard */; };
+		73CDBB70205BFD6600933763 /* PopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CDBB6F205BFD6600933763 /* PopVC.swift */; };
 		8894DA2C13D4C5A5DBC36E18 /* Pods_Pixel_City.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2025E62F6238956A317EBFC /* Pods_Pixel_City.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		7335D322204E2F86009E9207 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7335D325204E2F86009E9207 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7335D327204E2F86009E9207 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73CDBB6F205BFD6600933763 /* PopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopVC.swift; sourceTree = "<group>"; };
 		A5E94C496A00C2A345D64768 /* Pods-Pixel-City.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixel-City.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixel-City/Pods-Pixel-City.debug.xcconfig"; sourceTree = "<group>"; };
 		B2025E62F6238956A317EBFC /* Pods_Pixel_City.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixel_City.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1028D5A32F56FEAE977177A /* Pods-Pixel-City.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixel-City.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixel-City/Pods-Pixel-City.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				7335D31D204E2F86009E9207 /* MapVC.swift */,
+				73CDBB6F205BFD6600933763 /* PopVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CDBB70205BFD6600933763 /* PopVC.swift in Sources */,
 				7335D31E204E2F86009E9207 /* MapVC.swift in Sources */,
 				73312F0920545EFC003D1885 /* PhotoCell.swift in Sources */,
 				731154E12051817000514B6C /* DroppablePin.swift in Sources */,
